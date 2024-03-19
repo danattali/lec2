@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { RegisterUser } from "../@types/types";
+import patterns from "../validation/patterns";
 
 const Register = () => {
 
@@ -44,8 +45,63 @@ const Register = () => {
                         maxLength: { value: 10, message: "too long" },
                     })} />
                 {errors.phone && <p className="text-red-500">{errors.phone.message}</p>}
-                <button type="submit">Register</button>
 
+                <input
+                    placeholder="Email"
+                    type="email"
+                    {...register("email", {
+                        required: "This field is mandatory",
+                        pattern: {
+                            value: patterns.email,
+                            message: "Invalid email",
+                        },
+                    })}
+                />
+                {errors.email && (
+                    <p className="text-red-500">{errors.email?.message as string}</p>
+                )}
+                <input
+                    placeholder="Password"
+                    type="password"
+                    {...register("password", {
+                        required: "This field is mandatory",
+                        pattern: {
+                            value:
+                                patterns.password,
+                            message:
+                                "Password must be at least 9 characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-",
+                        },
+                    })}
+                />
+                {errors.password && (
+                    <p className="text-red-500">{errors.password?.message}</p>
+                )}
+                <input
+                    placeholder="Image URL"
+                    type="url"
+                    {...register("image.url", {
+                        pattern: {
+                            value: patterns.url,
+                            message: "Invalid image URL",
+                        },
+                    })}
+                />
+                {errors.image?.url && (
+                    <p className="text-red-500">{errors.image?.url?.message}</p>
+                )}
+
+                <input
+                    placeholder="Image Description"
+                    type="text"
+                    {...register("image.alt", {
+                        minLength: { value: 2, message: "Too short" },
+                        maxLength: { value: 255, message: "Too long" },
+                    })}
+                />
+                {errors.image?.alt && (
+                    <p className="text-red-500">{errors.image?.alt?.message}</p>
+                )}
+                <button type="submit">Register</button>
             </form>
         </div >
     );
