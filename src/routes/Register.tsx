@@ -101,6 +101,17 @@ const Register = () => {
                 {errors.image?.alt && (
                     <p className="text-red-500">{errors.image?.alt?.message}</p>
                 )}
+                <input
+                    placeholder="State"
+                    type="text"
+                    {...register("address.state", {
+                        minLength: { value: 2, message: "Too short" },
+                        maxLength: { value: 255, message: "Too long" },
+                    })}
+                />
+                {errors.address?.state && (
+                    <p className="text-red-500">{errors.address?.state?.message}</p>
+                )}
                 <button type="submit">Register</button>
             </form>
         </div >
