@@ -9,6 +9,8 @@ import { registerMock } from "../mocks/register";
 import axios from "axios";
 import auth from "../services/auth";
 import Swal from "sweetalert2";
+import dialogs from "../ui/dialogs";
+
 
 
 const Register = () => {
@@ -26,14 +28,10 @@ const Register = () => {
         auth
             .register(data)
             .then((res) => {
-                console.log(res);
+                dialogs.success("Success", "Logged in successfully");
             })
             .catch((e) => {
-                Swal.fire({
-                    title: "Good job!",
-                    text: e.response.data,
-                    icon: "error",
-                });
+                dialogs.error("Error", e.response.data);
             });
     };
     return (
