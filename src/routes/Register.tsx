@@ -8,6 +8,8 @@ import { useState } from "react";
 import { registerMock } from "../mocks/register";
 import axios from "axios";
 import auth from "../services/auth";
+import Swal from "sweetalert2";
+
 
 const Register = () => {
     const {
@@ -27,7 +29,11 @@ const Register = () => {
                 console.log(res);
             })
             .catch((e) => {
-                console.log(e);
+                Swal.fire({
+                    title: "Good job!",
+                    text: e.response.data,
+                    icon: "error",
+                });
             });
     };
     return (

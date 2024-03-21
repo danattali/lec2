@@ -21,6 +21,7 @@
     "react-spinners": "^0.13.8",
     "sass": "^1.71.1",
     "spinners": "^1.2.2",
+    "sweetalert2": "^11.10.6",
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
