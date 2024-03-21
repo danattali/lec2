@@ -7,6 +7,7 @@ import { BsEye, BsEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { registerMock } from "../mocks/register";
 import axios from "axios";
+import auth from "../services/auth";
 
 const Register = () => {
     const {
@@ -20,9 +21,15 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const onRegister = (data: RegisterUser) => {
-        // axios.post("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users", data);
+        auth
+            .register(data)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     };
-
     return (
         <div className="register-container">
             <h2>Register</h2>
