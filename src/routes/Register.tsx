@@ -2,13 +2,19 @@ import { useForm } from "react-hook-form";
 import { RegisterUser } from "../@types/types";
 import patterns from "../validation/patterns";
 import './Register.scss';
+import { DevTool } from "@hookform/devtools"
+import { BsEye, BsEyeSlash, BsEyeSlashFill } from "react-icons/bs";
+import { useState } from "react";
 
 const Register = () => {
     const {
         register,
+        control,
         handleSubmit,
         formState: { errors },
     } = useForm<RegisterUser>();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const onRegister = (data: RegisterUser) => {
         console.log(data);
@@ -94,6 +100,7 @@ const Register = () => {
                             },
                         })}
                     />
+
                     {errors.email && (
                         <p className="text-red-500">{errors.email?.message}</p>
                     )}
@@ -101,21 +108,31 @@ const Register = () => {
 
                 {/* password */}
                 <section>
-                    <input
-                        placeholder="Password"
-                        type="password"
-                        {...register("password", {
-                            required: "This field is mandatory",
-                            pattern: {
-                                value: patterns.password,
-                                message:
-                                    "Password must be at least 9 characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-",
-                            },
-                        })}
-                    />
-                    {errors.password && (
-                        <p className="text-red-500">{errors.password?.message}</p>
-                    )}
+                    <div>
+                        <input
+                            placeholder="Password"
+                            type="password"
+                            {...register("password", {
+                                required: "This field is mandatory",
+                                pattern: {
+                                    value: patterns.password,
+                                    message:
+                                        "Password must be at least 9 characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-",
+                                },
+                            })}
+                        />
+                        {errors.password && (
+                            <p className="text-red-500">{errors.password?.message}</p>
+                        )}
+                    </div>
+                    <span>
+
+                        <button onClick={() => {
+                            setShowPassword((s) => !s);
+                        }}>
+                            {showPassword ? <BsEyeSlashFill /> : <BsEye />}
+                        </button>
+                    </span>
                 </section>
 
                 {/* image.url */}
@@ -263,6 +280,7 @@ const Register = () => {
                 </section>
                 <button type="submit">Register</button>
             </form>
+            <DevTool control={control} />
         </div>
     );
 };
