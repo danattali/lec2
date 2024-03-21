@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { RegisterUser } from "../@types/types";
 import patterns from "../validation/patterns";
-import './Register.scss';
-import { DevTool } from "@hookform/devtools"
-import { BsEye, BsEyeSlash, BsEyeSlashFill } from "react-icons/bs";
+import "./Register.scss";
+import { DevTool } from "@hookform/devtools";
+import { BsEye, BsEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
+import { registerMock } from "../mocks/register";
+import axios from "axios";
 
 const Register = () => {
     const {
@@ -12,12 +14,13 @@ const Register = () => {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm<RegisterUser>();
-
+    } = useForm<RegisterUser>({
+        defaultValues: registerMock
+    });
     const [showPassword, setShowPassword] = useState(false);
 
     const onRegister = (data: RegisterUser) => {
-        console.log(data);
+        // axios.post("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users", data);
     };
 
     return (
@@ -100,7 +103,6 @@ const Register = () => {
                             },
                         })}
                     />
-
                     {errors.email && (
                         <p className="text-red-500">{errors.email?.message}</p>
                     )}
@@ -108,10 +110,10 @@ const Register = () => {
 
                 {/* password */}
                 <section>
-                    <div>
+                    <div className="password-container">
                         <input
                             placeholder="Password"
-                            type="password"
+                            type={showPassword ? `text` : `password`}
                             {...register("password", {
                                 required: "This field is mandatory",
                                 pattern: {
@@ -121,18 +123,18 @@ const Register = () => {
                                 },
                             })}
                         />
-                        {errors.password && (
-                            <p className="text-red-500">{errors.password?.message}</p>
-                        )}
-                    </div>
-                    <span>
-
-                        <button onClick={() => {
-                            setShowPassword((s) => !s);
-                        }}>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setShowPassword((s) => !s);
+                            }}
+                        >
                             {showPassword ? <BsEyeSlashFill /> : <BsEye />}
                         </button>
-                    </span>
+                    </div>
+                    {errors.password && (
+                        <p className="text-red-500">{errors.password?.message}</p>
+                    )}
                 </section>
 
                 {/* image.url */}
