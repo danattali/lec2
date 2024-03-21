@@ -12,6 +12,7 @@ const Login = () => {
             .login(data)
             .then((res) => {
                 console.log(res.data);
+                localStorage.setItem('jwt', res.data);
 
             })
             .catch((e) => {
