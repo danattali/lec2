@@ -10,10 +10,12 @@ import axios from "axios";
 import auth from "../services/auth";
 import Swal from "sweetalert2";
 import dialogs from "../ui/dialogs";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Register = () => {
+    const navigate = useNavigate();
     const {
         register,
         control,
@@ -27,8 +29,11 @@ const Register = () => {
     const onRegister = (data: RegisterUser) => {
         auth
             .register(data)
-            .then((res) => {
-                dialogs.success("Success", "Logged in successfully");
+            .then(() => {
+                dialogs.success("Success", "Register").then(() => {
+                    navigate("/login");
+                });
+                //go login
             })
             .catch((e) => {
                 dialogs.error("Error", e.response.data);

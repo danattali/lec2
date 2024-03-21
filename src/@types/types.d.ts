@@ -22,3 +22,7 @@ export type RegisterUser = {
     };
     isBusiness: boolean;
 };
+export type LoginUser = {
+    email: string;
+    password: string;
+};
