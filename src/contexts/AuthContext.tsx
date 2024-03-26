@@ -8,11 +8,17 @@ export const AuthContext = createContext({
 
 export const AuthContextProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const login = (jwt: string) => {
         setIsLoggedIn(true);
         localStorage.setItem("token", jwt);
     };
-    const logout = () => { };
+
+    const logout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem("token");
+    };
+
     return (
         <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
             {children}
