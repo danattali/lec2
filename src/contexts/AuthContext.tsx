@@ -2,13 +2,16 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext({
     isLoggedIn: false,
-    login: () => { },
+    login: (jwt: string) => { },
     logout: () => { },
 });
 
 export const AuthContextProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const login = () => { };
+    const login = (jwt: string) => {
+        setIsLoggedIn(true);
+        localStorage.setItem("token", jwt);
+    };
     const logout = () => { };
     return (
         <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
