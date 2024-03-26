@@ -1,14 +1,16 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 
 const Cards = () => {
-    fetch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards")
-        .then((res) => res.json())
-        .then((json) => {
-            console.log(json);
-        })
-    return (
-        <div>Cards</div>
-    )
-}
+    const [cards, setCards] = useState([]);
 
-export default Cards
+    useEffect(() => {
+        fetch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards")
+            .then((res) => res.json())
+            .then((json) => {
+                setCards(json);
+            });
+    }, []);
+    return <div>Cards</div>;
+};
+
+export default Cards;
