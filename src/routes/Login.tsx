@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
-import { useForm } from 'react-hook-form'
-import { LoginUser } from '../@types/types'
-import patterns from '../validation/patterns'
-import auth from '../services/auth'
-import { data } from 'autoprefixer'
-import dialogs, { showSuccessDialog } from '../ui/dialogs'
-import { AuthContext } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { useForm } from "react-hook-form";
+import { LoginUser } from "../@types/types";
+import patterns from "../validation/patterns";
+import auth from "../services/auth";
+import dialogs, { showSuccessDialog } from "../ui/dialogs";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -27,38 +26,50 @@ const Login = () => {
             });
     };
 
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginUser>()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginUser>();
+
     return (
         <div>
             <h2>Login Page</h2>
             <form noValidate onSubmit={handleSubmit(onLogin)}>
-                {/*email*/}
+                {/* email */}
                 <section>
-                    <input type="email" placeholder='Email'
-                        {...register('email', {
-                            required: 'Email is required',
-                            pattern: patterns.email
+                    <input
+                        placeholder="Email"
+                        autoCapitalize="true"
+                        autoCorrect="false"
+                        autoComplete="email"
+                        type="email"
+                        {...register("email", {
+                            required: "This field is mandatory",
+                            pattern: patterns.email,
                         })}
                     />
                     {errors.email && <p>{errors.email?.message}</p>}
                 </section>
-                {/*password*/}
+
+                {/* password */}
                 <section>
-                    <input type="password" placeholder='Password'
-                        {...register('password', {
-                            required: 'Password is required',
-                            pattern: patterns.password
-                        })
-                        }
+                    <input
+                        autoComplete="current-password"
+                        placeholder="Password"
+                        type="password"
+                        {...register("password", {
+                            required: "This field is mandatory",
+                            pattern: patterns.password,
+                        })}
                     />
                     {errors.password && <p>{errors.password?.message}</p>}
                 </section>
-                <button type="submit">Login</button>
+
+                <button>Login</button>
             </form>
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default Login
-
-
+export default Login;
