@@ -1,24 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { LoginUser } from '../@types/types'
 import patterns from '../validation/patterns'
 import auth from '../services/auth'
 import { data } from 'autoprefixer'
-import dialogs from '../ui/dialogs'
+import dialogs, { showSuccessDialog } from '../ui/dialogs'
+import { AuthContext } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
+
     const onLogin = (data: LoginUser) => {
         auth
             .login(data)
             .then((res) => {
-                console.log(res.data);
-                localStorage.setItem('jwt', res.data);
-
+                showSuccessDialog("Login", "Logged in").then(() => {
+                    login(res.data);
+                    // send the user to home page
+                    navigate("/");
+                });
             })
             .catch((e) => {
-                dialogs.error('Login Error', e.response.data)
+                dialogs.error("Login Error", e.response.data);
             });
-    }
+    };
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginUser>()
     return (
@@ -53,3 +60,5 @@ const Login = () => {
 }
 
 export default Login
+
+

@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-const showSuccessDialog = (title: string, text: string) => {
+export const showSuccessDialog = (title: string, text: string) => {
     return Swal.fire({
         title,
         text,
@@ -8,7 +8,7 @@ const showSuccessDialog = (title: string, text: string) => {
     })
 };
 
-const showErrorDialog = (title: string, text: string) => {
+export const showErrorDialog = (title: string, text: string) => {
     return Swal.fire({
         title,
         text,
