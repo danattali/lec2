@@ -1,0 +1,24 @@
+import { createBrowserRouter } from "react-router-dom";
+import Register from "./Register.tsx";
+import Login from "./Login.tsx";
+import Cards from "./Cards.tsx";
+import Error from "./Error.tsx";
+import Card from "./Card.tsx";
+import Playground from "./Playground.tsx";
+import Root from "../layouts/Root.tsx";
+
+export const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />,
+        errorElement: <Error />,
+        children: [
+            { index: true, element: <Cards /> },
+            { path: "/register", element: <Register /> },
+            { path: "/login", element: <Login /> },
+            { path: "/cards", element: <Cards /> },
+            { path: "/cards/:id", element: <Card /> },
+            { path: "/playground", element: <Playground /> },
+        ],
+    },
+]);
