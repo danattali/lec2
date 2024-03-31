@@ -2,7 +2,15 @@ import { useState } from "react";
 
 const Item = ({ text, collapsed, id, callback }) => {
     if (collapsed) {
-        return <button onClick={() => { callback(id); }}> Click to toggle</button >;
+        return (
+            <button
+                onClick={() => {
+                    callback(id);
+                }}
+            >
+                Click to toggle
+            </button>
+        );
     }
 
     return <div>{text}</div>;
@@ -14,6 +22,7 @@ const Playground = () => {
         { text: "item 2", id: 2, collapsed: true },
         { text: "item 3", id: 3, collapsed: true },
     ]);
+
     return (
         <div>
             {data.map((item) => (
@@ -23,18 +32,18 @@ const Playground = () => {
                     collapsed={item.collapsed}
                     id={item.id}
                     callback={(id) => {
-                        //child{1}was clicked
+                        // child {1} was clicked
+                        console.log(id);
 
                         const copy = [...data];
                         const index = copy.findIndex((item) => item.id === id);
-                        //close all the items
+                        //close all the items:
                         for (let i = 0; i < copy.length; i++) {
-                            copy[i].collapsed = true
+                            copy[i].collapsed = true;
                         }
                         //toggle the clicked item:
                         copy[index].collapsed = !copy[index].collapsed;
-                        setData(copy)
-
+                        setData(copy);
                     }}
                 />
             ))}

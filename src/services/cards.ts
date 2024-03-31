@@ -1,14 +1,5 @@
-import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const Card = () => {
-    // dynamic route: /cards/card1
-    const { id } = useParams();
-    return (
-        <div>
-        <h2>Card < /h2>
-        < p > Data for card { id } < /p>
-            < /div>
-  );
-};
+const baseUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards";
 
-export default Card;
+export const getCards = () => axios.get(baseUrl);
