@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import "./Navbar.scss";
 import { FaHome } from "react-icons/fa";
 import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
@@ -21,7 +21,11 @@ const Navbar = () => {
             <div className="nav-right">
                 {!isLoggedIn && <NavLink to="/register">Register</NavLink>}
                 {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
-                {isLoggedIn && <button onClick={logout}>Logout</button>}
+                {isLoggedIn && <button onClick={() => {
+                    logout();
+                    Navigate("/login");
+                }}
+                >Logout</button>}
                 <DarkModeToggle />
             </div>
         </nav>
