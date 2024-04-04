@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Register from "./Register.tsx";
 import Login from "./Login.tsx";
-import Cards from "./Cards.tsx";
+
 import Error from "./Error.tsx";
 import Card from "./Card.tsx";
 import Playground from "./Playground.tsx";
 import Root from "../layouts/Root.tsx";
 import ProtectedRoute from "../components/ProtectedRoute.tsx";
 import Profile from "./Profile.tsx";
+import Cards from "./Cards.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
             { path: "/cards", element: <Cards /> },
             { path: "/cards/:id", element: <Card /> },
             {
-                path: "/Profile",
+                path: "/profile",
                 element: (
                     <ProtectedRoute>
                         <Profile />
@@ -30,11 +31,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/playground",
-                element: (
-                    <ProtectedRoute>
-                        <Playground />
-                    </ProtectedRoute>
-                ),
+                element: <Playground />,
             },
 
         ],

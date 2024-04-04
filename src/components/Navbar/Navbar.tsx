@@ -31,6 +31,7 @@ const Navbar = () => {
                         Logout
                     </button>
                 )}
+
                 {isLoggedIn && <NavLink to="/profile"><RxAvatar /></NavLink>}
                 <DarkModeToggle />
             </div>
