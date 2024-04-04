@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-
+import { ReactNode } from 'react';
 export type LoginUser = {
     email: string;
     password: string;
@@ -29,7 +28,7 @@ export type RegisterUser = {
     isBusiness: boolean;
 };
 
-export type Card = {
+export type CardType = {
     _id: string;
     title: string;
     subtitle: string;
@@ -58,5 +57,12 @@ export type Card = {
     __v: number;
 };
 
-//טיפוס לפונקציה שמקבלת ילדים ומחזירה אלמנט של הריאקט
+export type ErrorType = {
+    status: number;
+    message: string;
+    details: string;
+};
+
+
+// טיפוס לפונקציה שמקבלת ילדים ומחזירה אלמנט של ראקט
 export type FCC = ({ children: ReactNode }) => ReactNode;
