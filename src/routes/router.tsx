@@ -20,12 +20,14 @@ export const router = createBrowserRouter([
             { path: "/cards", element: <Cards /> },
             { path: "/cards/:id", element: <Card /> },
             {
-                path: "/playground", element: (
+                path: "/playground",
+                element: (
                     <ProtectedRoute>
                         <Playground />
                     </ProtectedRoute>
                 ),
             },
+
         ],
     },
 ]);

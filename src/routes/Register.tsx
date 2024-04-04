@@ -29,7 +29,9 @@ const Register = () => {
     const onRegister = (data: RegisterUser) => {
         auth
             .register(data)
-            .then(() => {
+            .then((res) => {
+                console.log(res);
+
                 dialogs.success("Success", "Register").then(() => {
                     navigate("/login");
                 });

@@ -1,22 +1,16 @@
-import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
 import { Navigate } from "react-router-dom";
 import { FCC } from "../@types/types";
-import dialogs from "../ui/dialogs";
+import { showErrorDialog } from "../ui/dialogs";
 
 const ProtectedRoute: FCC = ({ children }) => {
-    const { isLoggedIn } = useContext(AuthContext);
+    const isLoggedIn = localStorage.getItem("token");
 
     if (!isLoggedIn) {
-        dialogs.error("BB", "BB").then()
-        return (
-            <div>
-                Hey Joe,
-                <div className="bg-orange-300">{children}</div>
-            </div>
-        );
+        showErrorDialog("Unauthorized", "You must be logged in to access this page");
+        return <Navigate to={"/login"} replace />;
     }
-    return <>{children}</>
+
+    return <>{children}</>;
 };
 
 export default ProtectedRoute;
