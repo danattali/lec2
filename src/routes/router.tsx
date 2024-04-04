@@ -6,6 +6,7 @@ import Error from "./Error.tsx";
 import Card from "./Card.tsx";
 import Playground from "./Playground.tsx";
 import Root from "../layouts/Root.tsx";
+import ProtectedRoute from "../components/ProtectedRoute.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -18,7 +19,13 @@ export const router = createBrowserRouter([
             { path: "/login", element: <Login /> },
             { path: "/cards", element: <Cards /> },
             { path: "/cards/:id", element: <Card /> },
-            { path: "/playground", element: <Playground /> },
+            {
+                path: "/playground", element: (
+                    <ProtectedRoute>
+                        <Playground />
+                    </ProtectedRoute>
+                ),
+            },
         ],
     },
 ]);
