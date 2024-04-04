@@ -6,13 +6,9 @@ import { DevTool } from "@hookform/devtools";
 import { BsEye, BsEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { registerMock } from "../mocks/register";
-import axios from "axios";
 import auth from "../services/auth";
-import Swal from "sweetalert2";
 import dialogs from "../ui/dialogs";
 import { useNavigate } from "react-router-dom";
-
-
 
 const Register = () => {
     const navigate = useNavigate();
@@ -22,25 +18,24 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm<RegisterUser>({
-        defaultValues: registerMock
+        defaultValues: registerMock,
     });
     const [showPassword, setShowPassword] = useState(false);
 
     const onRegister = (data: RegisterUser) => {
         auth
-            .register(data)
-            .then((res) => {
-                console.log(res);
-
+            .register(data) //request
+            .then((res) => {//201 response
+                localStorage.setItem("user_id", res.data._id);
                 dialogs.success("Success", "Register").then(() => {
                     navigate("/login");
                 });
-                //go login
             })
             .catch((e) => {
                 dialogs.error("Error", e.response.data);
             });
     };
+
     return (
         <div className="register-container">
             <h2>Register</h2>
@@ -300,7 +295,7 @@ const Register = () => {
                 </section>
                 <button type="submit">Register</button>
             </form>
-            <DevTool control={control} />
+            {/* <DevTool control={control} /> */}
         </div>
     );
 };
