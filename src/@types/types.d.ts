@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type LoginUser = {
     email: string;
     password: string;
@@ -55,3 +57,6 @@ export type Card = {
     createdAt: string;
     __v: number;
 };
+
+//טיפוס לפונקציה שמקבלת ילדים ומחזירה אלמנט של הריאקט
+export type FCC = ({ children: ReactNode }) => ReactNode;

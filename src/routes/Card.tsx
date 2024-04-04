@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
+import { FCC } from "../@types/types";
 
-const Card = () => {
+const Card: FCC = () => {
     // dynamic route: /cards/:id
     const { id } = useParams();
     return (
