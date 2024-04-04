@@ -7,6 +7,7 @@ import Card from "./Card.tsx";
 import Playground from "./Playground.tsx";
 import Root from "../layouts/Root.tsx";
 import ProtectedRoute from "../components/ProtectedRoute.tsx";
+import Profile from "./Profile.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +20,14 @@ export const router = createBrowserRouter([
             { path: "/login", element: <Login /> },
             { path: "/cards", element: <Cards /> },
             { path: "/cards/:id", element: <Card /> },
+            {
+                path: "/Profile",
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                ),
+            },
             {
                 path: "/playground",
                 element: (
